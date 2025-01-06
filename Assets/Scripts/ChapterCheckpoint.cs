@@ -6,6 +6,7 @@ public class ChapterCheckpoint : MonoBehaviour
     public int checkpointID;
     public Transform checkpointPosition;
     public string chapterSubtitle;
+    public string chapterTitle;
     private bool checkpointReached;
 
 

@@ -27,6 +27,8 @@ public class PlayerController : MonoBehaviour
     public float groundCheckRadius = 0.3f;
     public LayerMask groundLayer;
 
+    [Header("Sphere")] public Transform sphereTransform;
+
     private Rigidbody rb;
     private TrailRenderer trailRenderer;
     private Vector3 moveInput;
@@ -43,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-       // StartFloating();
+       //StartFloating();
     }
 
     private void Update()
@@ -83,7 +85,7 @@ public class PlayerController : MonoBehaviour
 
     private void StartFloating()
     {
-        transform.DOMoveY(transform.position.y + floatRange, floatDuration)
+        sphereTransform.DOMoveY(sphereTransform.position.y + floatRange, floatDuration)
                  .SetEase(Ease.InOutSine)
                  .SetLoops(-1, LoopType.Yoyo);
     }
@@ -113,8 +115,7 @@ public class PlayerController : MonoBehaviour
         isDashing = true;
         trailRenderer.enabled = true;
 
-        Vector3 dashDirection = moveInput.magnitude > 0 ? moveInput : transform.forward;
-
+        Vector3 dashDirection = moveInput.magnitude > 0 ? moveInput : transform.right;
         if (isGrounded)
         {
             // Adjust upward angle for ground dash

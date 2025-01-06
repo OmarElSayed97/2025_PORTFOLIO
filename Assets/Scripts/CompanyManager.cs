@@ -40,6 +40,8 @@ public class CompanyManager : MonoBehaviour
     public float floatRange = 0.5f;
     public float floatDuration = 2f;
 
+    [Header("Company Interaction Point")] public InteractionPointManager interactionPointManager;
+
     private Transform[] balls;
     private Material[] ballMaterials;
     private Material spinningChildMaterial;
@@ -118,11 +120,12 @@ public class CompanyManager : MonoBehaviour
         sequence.Join(spinningChildMaterial.DOColor(companyEmissionColor * 2.5f, "_EmissionColor", 1f).SetEase(Ease.Linear));
 
         // Start floating animation for the spinningChild
-        sequence.OnComplete(() => StartFloating());
+        sequence.OnComplete(() => StartBossStory());
     }
 
-    private void StartFloating()
+    private void StartBossStory()
     {
+        interactionPointManager.isJustEvolved = true;
         spinningChild.DOMoveY(spinningChild.position.y + floatRange, floatDuration)
             .SetEase(Ease.InOutSine)
             .SetLoops(-1, LoopType.Yoyo);
